@@ -1,4 +1,5 @@
 # B+-Forest
+B+-Forest is an ordered index for Processing-In-Memory (PIM) architectures. It is implemented for [UPMEM](), a practical PIM architecture.  B+-Forest is based on many B+-trees and aims to handle data skew by migrating hot B+-trees from DPU to CPU.
 ## Directory
 - /dpu
   - Source codes and header files for the DPUs (including B+tree implementation)
@@ -7,7 +8,7 @@
 - /common
   - Common header files
   
-## パラメータの変更
+## Parameters
 - common/common.h
   - NR_DPUS
     - the number of DPUs(1~2560)
