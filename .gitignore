@@ -1,0 +1,7 @@
+build/*
+dputest.c
+scripts/*
+data/*
+graphs/*
+log/*
+ycsb-c/*
