@@ -1,23 +1,19 @@
-# PIM_Masstree
-## ディレクトリ
-- dpu
-  - DPUソースコード、ヘッダファイル(B+木の実装を含む)
-- host
-  - Host CPUソースコード、ヘッダファイル
-- common
-  - 共通のインクルードファイル
-- data
-  - 実験結果のcsvファイル
-- graphs
-  - csvファイルから描画したグラフ
-- log
-  - 実行時ログ
+# B+-Forest
+## Directory
+- /dpu
+  - Source codes and header files for the DPUs (including B+tree implementation)
+- /host
+  - Source codes and headers files the host CPU 
+- /common
+  - Common header files
   
 ## パラメータの変更
 - common/common.h
   - NR_DPUS
-    - DPUの数(1~2560)
-  - NUM_BATCH
-    - バッチの数
+    - the number of DPUs(1~2560)
+  - NR_TASKLETS
+    - the number of threads in each DPU (1~24)
   - NUM_REQUESTS
-    - 挿入、検索の数
+    - the number of requests
+  - NUM_REQUESTS_IN_BATCH
+    - The number of requests in a batch
