@@ -196,13 +196,13 @@ void local_bptree_init(void* thread_id){
 void execute_queries(void* thread_id){
   int tid = *((int*)thread_id);
   //thread->core map
-  cpu_set_t aff_mask,get_mask;
-  uint32_t cpu_id = tid; // the cpu the thread want to use
-  CPU_ZERO(&aff_mask);
-  CPU_SET(cpu_id, &aff_mask);
-  //printf("thread %d:setting mask to %08lx\n",tid,*(unsigned long*)aff_mask.__bits);
-  assert(0 == sched_setaffinity(0, sizeof(cpu_set_t), &aff_mask));
-  assert(0 == sched_getaffinity(0, sizeof(cpu_set_t), &get_mask));
+  // cpu_set_t aff_mask,get_mask;
+  // uint32_t cpu_id = tid; // the cpu the thread want to use
+  // CPU_ZERO(&aff_mask);
+  // CPU_SET(cpu_id, &aff_mask);
+  // //printf("thread %d:setting mask to %08lx\n",tid,*(unsigned long*)aff_mask.__bits);
+  // assert(0 == sched_setaffinity(0, sizeof(cpu_set_t), &aff_mask));
+  // assert(0 == sched_getaffinity(0, sizeof(cpu_set_t), &get_mask));
   //printf("thread %d:set mask to %08lx\n",tid,*(unsigned long*)get_mask.__bits);
   value_ptr_t_ volatile getval;
   //printf("thread %d: %d times of insertion\n", tid, num_reqs[tid]);
