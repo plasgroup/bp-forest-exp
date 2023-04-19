@@ -21,7 +21,7 @@
 #endif
 
 #ifndef FILE_NAME
-#define FILE_NAME "./workload/test.csv"
+#define FILE_NAME "./workload/zipfianconst1.2.csv"
 #endif
 
 #define GET_AND_PRINT_TIME(CODES,LABEL)  gettimeofday(&start, NULL); \
@@ -238,10 +238,9 @@ void execute_cpu(){
 }
 
 
-void execute_one_batch(struct dpu_set_t set, struct dpu_set_t dpu, int num_keys){
+void execute_one_batch(struct dpu_set_t set, struct dpu_set_t dpu){
   //printf("\n");
   //printf("======= batch %d =======\n",batch_num);
-  total_num_keys += num_keys;
   //show_requests(0);
   gettimeofday(&start_total, NULL);
   //CPU→DPU
@@ -336,10 +335,12 @@ int main(void) {
   // DPU_ASSERT(dpu_launch(set, DPU_SYNCHRONOUS));
   // free(dpu_requests);
   //printf("initialization finished\n");
-  for(int i = 0; i < NUM_BATCH; i++){
-
-      int num_keys = generate_requests_fromfile(fp);
-      execute_one_batch(set,dpu,num_keys);
+  int num_keys = 1;
+  while(num_keys != 0 && total_num_keys < 1000000) {
+      printf("%d\n", num_keys);
+      num_keys = generate_requests_fromfile(fp);
+      total_num_keys += num_keys;
+      execute_one_batch(set,dpu);
       #ifdef DEBUG_ON
         printf("results from DPUs: batch %d\n",i);
         DPU_FOREACH(set, dpu) {
