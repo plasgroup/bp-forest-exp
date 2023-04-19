@@ -337,7 +337,7 @@ int main(void) {
   //printf("initialization finished\n");
   int num_keys = 1;
   while(num_keys != 0 && total_num_keys < 1000000) {
-      printf("%d\n", num_keys);
+      //printf("%d\n", num_keys);
       num_keys = generate_requests_fromfile(fp);
       total_num_keys += num_keys;
       execute_one_batch(set,dpu);
