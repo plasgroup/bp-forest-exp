@@ -1,6 +1,5 @@
 build/*
 dputest.c
-data/*
 graphs/*
 log/*
 ycsb-c/*

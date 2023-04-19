@@ -351,7 +351,7 @@ int main(void) {
   }
 
   double throughput = 2*total_num_keys/total_time_execution;
-  printf("%d, %ld, %0.8f, %0.8f, %0.8f, %0.0f\n", NR_TASKLETS, (long int)2*total_num_keys, total_time_sendrequests, total_time_execution, total_time, throughput);
+  printf("%d, %ld, %0.8f, %0.8f, %0.8f, %0.0f\n", NUM_BPTREE_IN_CPU, (long int)2*total_num_keys, total_time_sendrequests, total_time_execution, total_time, throughput);
   DPU_ASSERT(dpu_free(set));
 #ifdef WRITE_CSV
   // write results to a csv file

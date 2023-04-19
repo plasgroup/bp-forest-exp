@@ -1,8 +1,8 @@
 #!/bin/bash
 mkdir -p build
-NR_DPUS=5
-NR_TASKLETS=2
-NUM_BPTREE_IN_CPU=(0 1 2 3 4 5 6 7 8 9 10)
+NR_DPUS=2500
+NR_TASKLETS=12
+NUM_BPTREE_IN_CPU=(0 1 2 3 4 6 8 10 15 20 30 40 50)
 FILE_NAME=(zipfianconst0.csv zipfianconst0.99.csv zipfianconst1.2.csv)
 for j in ${FILE_NAME[@]}; do
     echo "num of tasklets,num of requests, time for sending task[s], time for execution[s], total time[s], throughput[OPS/s]" > ./data/${j}.csv
