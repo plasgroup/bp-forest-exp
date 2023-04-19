@@ -1,0 +1,8 @@
+Script started on 2023-04-19 09:34:22+09:00 [TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="-1" LINES="-1"]
+api:W:2023-04-19|09:34:22: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-19|09:34:22: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+libnuma: Warning: Cannot read node cpumask from sysfs
+Allocated 2 DPU(s)
+2, 60, 0.00024800, 0.00041300, 0.00066100, 145278
+
+Script done on 2023-04-19 09:34:22+09:00 [COMMAND_EXIT_CODE="0"]
