@@ -48,7 +48,7 @@
 #endif
 
 BPTptr newBPTreeNode(BPlusTree * bpt) {
-    BPTptr p = malloc(sizeof(BPTreeNode));
+    BPTptr p = (BPTptr)malloc(sizeof(BPTreeNode));
 	p->parent = NULL;
     p->isRoot = false;
     p->isLeaf = false;
@@ -205,7 +205,7 @@ void insert(BPlusTree * bpt, BPTptr cur, key_t_ key, value_ptr_t_ value, BPTptr 
 
 BPlusTree* init_BPTree() {
 	BPlusTree* bpt = (BPlusTree *)malloc(sizeof(BPlusTree));
-    bpt->root = malloc(sizeof(BPTreeNode));
+    bpt->root = (BPTptr)malloc(sizeof(BPTreeNode));
     bpt->NumOfNodes = 1;
 	bpt->height = 1;
 	bpt->root = newBPTreeNode(bpt);
