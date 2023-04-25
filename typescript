@@ -1,18 +1,56 @@
-Script started on 2023-04-19 09:43:08+09:00 [TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="-1" LINES="-1"]
-api:W:2023-04-19|09:43:08: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
-api:W:2023-04-19|09:43:08: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+Script started on 2023-04-25 14:10:41+09:00 [TERM="xterm-256color" TTY="/dev/pts/8" COLUMNS="-1" LINES="-1"]
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
+api:W:2023-04-25|14:10:41: [01;31mdetermine_default_backend_type: Fallback to SIMULATOR backend as no hardware device was found and no explicit backend is provided (add 'backend=simulator' to the profile argument when allocating DPUs to suppress this message)[0m
 libnuma: Warning: Cannot read node cpumask from sysfs
-Allocated 2 DPU(s)
-1
-100000
-100000
-100000
-100000
-100000
-100000
-100000
-100000
-100000
-2, 2000000, 0.00184900, 7.23871899, 7.24056816, 276292
+Allocated 50 DPU(s)
+2, 2000000, 0.13228701, 3.62096906, 3.75325632, 552338
 
-Script done on 2023-04-19 09:43:16+09:00 [COMMAND_EXIT_CODE="0"]
+Script done on 2023-04-25 14:10:45+09:00 [COMMAND_EXIT_CODE="0"]
