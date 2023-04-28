@@ -1,0 +1,3 @@
+[submodule "bp-forest"]
+	path = bp-forest
+	url = git@github.com:plasgroup/bp-forest.git
