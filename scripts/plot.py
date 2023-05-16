@@ -106,5 +106,99 @@ def makefigure_taskletnum_time():
     fig.subplots_adjust(bottom=0.13,left=0.15,top=0.93,right=0.99)
     plt.savefig("graphs/num_of_tasklets_time_pointerdram.png",transparent = True)
     plt.show()
-makefigure_taskletnum()
-makefigure_taskletnum_time()
+    
+def makefigure_numcpu_throughput_ratio():
+    zipf_const = ["0", "0.99", "1.2"]
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
+    ax2 = ax1.twinx()
+    for a in zipf_const:
+        x_axis = []
+        throughput = []
+        cpu_percent = []
+        df = pd.read_csv("data/cpu_and_dpu_zipfianconst" + a + ".csv")
+        #result += df['Time'].values.tolist()
+        throughput += df[' throughput'].values.tolist()
+        cpu_percent += df[' num_reqs_{cpu/(cpu+dpu)}'].values.tolist()
+        for i in range (0, len(throughput)):
+            throughput[i] = throughput[i]/1000000.0
+        x_axis += df[' num_CPU_Trees'].values.tolist()
+        plt.rcParams["savefig.dpi"] = 300
+        plt.title("throughput",fontsize=18)
+        plt.xlabel('number of Trees in CPU',fontsize=18)
+        ax1.set_ylabel('throughput[MOPS/s]',fontsize=18)
+        ax2.set_ylabel('query ratio in cpu[%]',fontsize=18)
+        ax1.plot(x_axis, throughput, marker='o', label="zipf_const=" + a)
+        ax2.plot(x_axis, cpu_percent, marker='x', label="zipf_const=" + a)
+        #plt.xlim(0,)
+        #plt.ylim(0,)
+        plt.xscale('log')
+        #plt.xticks([1000]+x_axis[6:],["1000"]+[str(num) for num in x_axis[6:]])
+        ax1.set_yscale('log')
+        plt.grid()
+        fig.subplots_adjust()
+    plt.legend()
+    plt.savefig("graphs/cpu_and_dpu.png",transparent = False)
+    plt.show()
+    
+def makefigure_numcpu_throughput_ratio():
+    zipf_const = ["0", "0.99", "1.2"]
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
+    for a in zipf_const:
+        throughput = []
+        cpu_percent = []
+        df = pd.read_csv("data/cpu_and_dpu_zipfianconst" + a + ".csv")
+        #result += df['Time'].values.tolist()
+        throughput += df[' throughput'].values.tolist()
+        cpu_percent += df[' num_reqs_{cpu/(cpu+dpu)}'].values.tolist()
+        for i in range (0, len(throughput)):
+            throughput[i] = throughput[i]/1000000.0
+        plt.rcParams["savefig.dpi"] = 300
+        plt.title("throughput",fontsize=18)
+        plt.xlabel('CPU Query Ratio',fontsize=18)
+        ax1.set_ylabel('throughput[MOPS/s]',fontsize=18)
+        ax1.plot(cpu_percent, throughput, marker='o', label="zipf_const=" + a)
+        #plt.xlim(0,)
+        #plt.ylim(0,)
+        #plt.xscale('log')
+        #plt.xticks([1000]+x_axis[6:],["1000"]+[str(num) for num in x_axis[6:]])
+        ax1.set_yscale('log')
+        plt.grid()
+        fig.subplots_adjust()
+    plt.legend()
+    plt.savefig("graphs/cpu_and_dpu_cpuratio.png",transparent = False)
+    plt.show()
+
+def makefigure_numcpu_throughput():
+    zipf_const = ["0", "0.99", "1.2"]
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
+    for a in zipf_const:
+        x_axis = []
+        throughput = []
+        cpu_percent = []
+        df = pd.read_csv("data/cpu_and_dpu_zipfianconst" + a + ".csv")
+        #result += df['Time'].values.tolist()
+        throughput += df[' throughput'].values.tolist()
+        cpu_percent += df[' num_reqs_{cpu/(cpu+dpu)}'].values.tolist()
+        for i in range (0, len(throughput)):
+            throughput[i] = throughput[i]/1000000.0
+        x_axis += df[' num_CPU_Trees'].values.tolist()
+        plt.rcParams["savefig.dpi"] = 300
+        #plt.title("CPU Skew",fontsize=18)
+        plt.xlabel('Number of Trees in CPU',fontsize=18)
+        ax1.set_ylabel('Throughput[MOPS/s]',fontsize=18)
+        ax1.plot(x_axis, throughput, marker='o', label="Zipfian Const=" + a)
+        #plt.xlim(0,)
+        #plt.ylim(0,)
+        plt.xscale('log')
+        #plt.xticks([1000]+x_axis[6:],["1000"]+[str(num) for num in x_axis[6:]])
+        ax1.set_yscale('log')
+        plt.grid()
+        fig.subplots_adjust()
+    plt.legend()
+    plt.savefig("graphs/cpu_and_dpu.png",transparent = False)
+    plt.show()
+makefigure_numcpu_throughput()
+makefigure_numcpu_throughput_ratio()
