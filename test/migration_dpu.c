@@ -6,27 +6,31 @@
 typedef uint64_t key_int64_t;
 typedef uint64_t value_ptr_t;
 
-typedef __mram_ptr struct BPTreeNode* MBPTptr;
+typedef __mram_ptr struct BPTreeNode *MBPTptr;
 MBPTptr root, root2;
 
-typedef struct InternalNodePtrs {
+typedef struct InternalNodePtrs
+{
     MBPTptr children[MAX_CHILD + 1];
 
 } InternalNodePtrs;
-typedef struct LeafNodePtrs {
+typedef struct LeafNodePtrs
+{
     value_ptr_t value[MAX_CHILD];
     MBPTptr right;
     MBPTptr left;
     uint64_t dummy_pad;
 } LeafNodePtrs;
 
-typedef struct BPTreeNode {
+typedef struct BPTreeNode
+{
     int isRoot : 8;
     int isLeaf : 8;
     int numKeys : 16;
     key_int64_t key[MAX_CHILD];
     MBPTptr parent;
-    union {
+    union
+    {
         InternalNodePtrs inl;
         LeafNodePtrs lf;
     } ptrs;
@@ -44,24 +48,26 @@ __mram int free_node_index_stack[MAX_NODE_NUM];
 int height = 1;
 
 #ifdef DEBUG_ON
-typedef struct Queue {  // queue for showing all nodes by BFS
+typedef struct Queue
+{ // queue for showing all nodes by BFS
     int tail;
     int head;
     MBPTptr ptrs[MAX_NODE_NUM];
 } Queue_t;
 
-__mram_ptr Queue_t* queue;
+__mram_ptr Queue_t *queue;
 
-void initQueue(__mram_ptr Queue_t* queue)
+void initQueue(__mram_ptr Queue_t *queue)
 {
     queue->head = 0;
     queue->tail = -1;
     // printf("queue is initialized\n");
 }
 
-void enqueue(__mram_ptr Queue_t* queue, MBPTptr input)
+void enqueue(__mram_ptr Queue_t *queue, MBPTptr input)
 {
-    if ((queue->tail + 2) % MAX_NODE_NUM == queue->head) {
+    if ((queue->tail + 2) % MAX_NODE_NUM == queue->head)
+    {
         printf("queue is full\n");
         return;
     }
@@ -70,10 +76,11 @@ void enqueue(__mram_ptr Queue_t* queue, MBPTptr input)
     // printf("%p is enqueued\n",input);
 }
 
-MBPTptr dequeue(__mram_ptr Queue_t* queue)
+MBPTptr dequeue(__mram_ptr Queue_t *queue)
 {
     MBPTptr ret;
-    if ((queue->tail + 1) % MAX_NODE_NUM == queue->head) {
+    if ((queue->tail + 1) % MAX_NODE_NUM == queue->head)
+    {
         printf("queue is empty\n");
         return NULL;
     }
@@ -93,9 +100,11 @@ int NumOfNodes = 0;
 MBPTptr newBPTreeNode()
 {
     MBPTptr p;
-    if (free_node_index_stack_head >= 0) {  // if there is gap in nodes array
+    if (free_node_index_stack_head >= 0)
+    { // if there is gap in nodes array
         p = &nodes[free_node_index_stack[free_node_index_stack_head--]];
-    } else
+    }
+    else
         p = &nodes[++max_node_index];
     p->parent = NULL;
     p->isRoot = false;
@@ -114,7 +123,8 @@ int findKeyPos(MBPTptr n, key_int64_t key)
         return l;
     if (n->key[r - 1] <= key)
         return r;
-    while (l < r - 1) {
+    while (l < r - 1)
+    {
         int mid = (l + r) >> 1;
         if (n->key[mid - 1] > key)
             r = mid;
@@ -130,7 +140,8 @@ int findKeyPos(MBPTptr n, key_int64_t key)
 int findKeyPos(MBPTptr n, key_int64_t key)
 {
     int ret = 0;
-    for (int ret = 0; ret < n->numKeys; ret++) {
+    for (int ret = 0; ret < n->numKeys; ret++)
+    {
         if (n->key[ret] <= key)
             return ret;
     }
@@ -140,12 +151,16 @@ int findKeyPos(MBPTptr n, key_int64_t key)
 MBPTptr findLeaf(key_int64_t key)
 {
     MBPTptr n = root;
-    while (true) {
+    while (true)
+    {
         if (n->isLeaf == true)
             break;
-        if (key < n->key[0]) {
+        if (key < n->key[0])
+        {
             n = n->ptrs.inl.children[0];
-        } else {
+        }
+        else
+        {
             int i = findKeyPos(n, key);
 #ifdef DEBUG_ON
             // printf("findLeaf:Node = %p, key = %d, i = %d\n",n, key,i);
@@ -164,8 +179,10 @@ void split(MBPTptr cur)
     int Mid = (MAX_CHILD + 1) >> 1;
     n->isLeaf = cur->isLeaf;
     n->numKeys = MAX_CHILD - Mid;
-    if (!n->isLeaf) {  // n is InternalNode
-        for (int i = Mid; i < MAX_CHILD; i++) {
+    if (!n->isLeaf)
+    { // n is InternalNode
+        for (int i = Mid; i < MAX_CHILD; i++)
+        {
             n->ptrs.inl.children[i - Mid] = cur->ptrs.inl.children[i];
             n->key[i - Mid] = cur->key[i];
             n->ptrs.inl.children[i - Mid]->parent = n;
@@ -173,16 +190,20 @@ void split(MBPTptr cur)
         }
         n->ptrs.inl.children[MAX_CHILD - Mid] = cur->ptrs.inl.children[MAX_CHILD];
         n->ptrs.inl.children[MAX_CHILD - Mid]->parent = n;
-    } else {  // n is LeafNode
+    }
+    else
+    { // n is LeafNode
         n->ptrs.lf.right = NULL;
         n->ptrs.lf.left = NULL;
-        for (int i = Mid; i < MAX_CHILD; i++) {
+        for (int i = Mid; i < MAX_CHILD; i++)
+        {
             n->ptrs.lf.value[i - Mid] = cur->ptrs.lf.value[i];
             n->key[i - Mid] = cur->key[i];
             cur->numKeys = Mid;
         }
     }
-    if (cur->isRoot) {  // root Node splits
+    if (cur->isRoot)
+    { // root Node splits
         // Create a new root
         root = newBPTreeNode();
         root->isRoot = true;
@@ -192,19 +213,27 @@ void split(MBPTptr cur)
         root->ptrs.inl.children[1] = n;
         cur->parent = n->parent = root;
         cur->isRoot = false;
-        if (cur->isLeaf) {
+        if (cur->isLeaf)
+        {
             cur->ptrs.lf.right = n;
             n->ptrs.lf.left = cur;
             root->key[0] = n->key[0];
-        } else {
+        }
+        else
+        {
             root->key[0] = cur->key[Mid - 1];
         }
         height++;
-    } else {  // insert n to cur->parent
+    }
+    else
+    { // insert n to cur->parent
         n->parent = cur->parent;
-        if (cur->isLeaf) {
+        if (cur->isLeaf)
+        {
             insert(n->parent, n->key[0], 0, n);
-        } else {
+        }
+        else
+        {
             insert(cur->parent, cur->key[Mid - 1], 0, n);
         }
     }
@@ -214,11 +243,16 @@ void insert(MBPTptr cur, key_int64_t key, value_ptr_t value, MBPTptr n)
 {
     int i, ins;
     ins = findKeyPos(cur, key);
-    if (cur->isLeaf == true) {                       // inserted into a Leaf node
-        if (ins != 0 && cur->key[ins - 1] == key) {  // key already exist
+    if (cur->isLeaf == true)
+    { // inserted into a Leaf node
+        if (ins != 0 && cur->key[ins - 1] == key)
+        { // key already exist
             cur->ptrs.lf.value[ins - 1] = value;
-        } else {  // key doesn't already exist
-            for (i = cur->numKeys; i > ins; i--) {
+        }
+        else
+        { // key doesn't already exist
+            for (i = cur->numKeys; i > ins; i--)
+            {
                 cur->key[i] = cur->key[i - 1];
                 cur->ptrs.lf.value[i] = cur->ptrs.lf.value[i - 1];
             }
@@ -226,10 +260,12 @@ void insert(MBPTptr cur, key_int64_t key, value_ptr_t value, MBPTptr n)
             cur->ptrs.lf.value[ins] = value;
             cur->numKeys++;
         }
-
-    } else {  // inserted into an internal node by split
+    }
+    else
+    { // inserted into an internal node by split
         cur->ptrs.inl.children[cur->numKeys + 1] = cur->ptrs.inl.children[cur->numKeys];
-        for (i = cur->numKeys; i > ins; i--) {
+        for (i = cur->numKeys; i > ins; i--)
+        {
             cur->ptrs.inl.children[i] = cur->ptrs.inl.children[i - 1];
             cur->key[i] = cur->key[i - 1];
         }
@@ -237,8 +273,10 @@ void insert(MBPTptr cur, key_int64_t key, value_ptr_t value, MBPTptr n)
         cur->ptrs.inl.children[ins + 1] = n;
         cur->numKeys++;
         MBPTptr firstChild = cur->ptrs.inl.children[0];
-        if (firstChild->isLeaf == true) {  // the child is Leaf
-            if (ins > 0) {
+        if (firstChild->isLeaf == true)
+        { // the child is Leaf
+            if (ins > 0)
+            {
                 MBPTptr prevChild;
                 MBPTptr nextChild;
                 prevChild = cur->ptrs.inl.children[ins];
@@ -248,7 +286,9 @@ void insert(MBPTptr cur, key_int64_t key, value_ptr_t value, MBPTptr n)
                 n->ptrs.lf.left = prevChild;
                 if (nextChild != NULL)
                     nextChild->ptrs.lf.left = n;
-            } else {  // do not have a prevChild
+            }
+            else
+            { // do not have a prevChild
                 n->ptrs.lf.right = cur->ptrs.inl.children[2];
                 n->ptrs.lf.left = cur->ptrs.inl.children[0];
                 firstChild->ptrs.lf.right = n;
@@ -256,7 +296,7 @@ void insert(MBPTptr cur, key_int64_t key, value_ptr_t value, MBPTptr n)
         }
     }
     if (cur->numKeys == MAX_CHILD)
-        split(cur);  // key is full
+        split(cur); // key is full
 }
 
 void init_BPTree()
@@ -273,7 +313,8 @@ void init_BPTree()
 
 int BPTreeInsert(key_int64_t key, value_ptr_t value)
 {
-    if (root->numKeys == 0) {  // if the tree is empty
+    if (root->numKeys == 0)
+    { // if the tree is empty
         root->key[0] = key;
         root->numKeys++;
         root->ptrs.lf.value[0] = value;
@@ -291,8 +332,10 @@ value_ptr_t BPTreeGet(key_int64_t key)
 {
     MBPTptr Leaf = findLeaf(key);
     int i;
-    for (i = 0; i < Leaf->numKeys; i++) {
-        if (Leaf->key[i] == key) {
+    for (i = 0; i < Leaf->numKeys; i++)
+    {
+        if (Leaf->key[i] == key)
+        {
 #ifdef DEBUG_ON
             // printf("[key = %ld: found]", Leaf->key[i]);
 #endif
@@ -306,34 +349,41 @@ value_ptr_t BPTreeGet(key_int64_t key)
 }
 #ifdef DEBUG_ON
 void showNode(MBPTptr cur, int nodeNo)
-{  // show single node
+{ // show single node
     printf("[Node No. %d]\n", nodeNo);
-    if (cur->isLeaf == true) {
+    if (cur->isLeaf == true)
+    {
         cur->isRoot ? printf("this is a Root LeafNode (addr %p)\n", cur) : printf("this is a LeafNode (addr %p)\n", cur);
         printf("0. parent: %p\n", cur->parent);
         printf("1. number of keys: %d\n", cur->numKeys);
         printf("2. keys:[ ");
-        for (int i = 0; i < cur->numKeys; i++) {
+        for (int i = 0; i < cur->numKeys; i++)
+        {
             printf("%lu ", cur->key[i]);
         }
         printf("]\n");
         printf("3. values:[ ");
-        for (int i = 0; i < cur->numKeys; i++) {
+        for (int i = 0; i < cur->numKeys; i++)
+        {
             printf("%lu ", cur->ptrs.lf.value[i]);
         }
         printf("]\n");
         printf("4. leaf connections, left: %p right: %p\n", cur->ptrs.lf.left, cur->ptrs.lf.right);
-    } else {
+    }
+    else
+    {
         cur->isRoot ? printf("this is a Root InternalNode (addr %p)\n", cur) : printf("this is an InternalNode (addr %p)\n", cur);
         printf("0. parent: %p\n", cur->parent);
         printf("1. number of keys: %d\n", cur->numKeys);
         printf("2. keys:[ ");
-        for (int i = 0; i < cur->numKeys; i++) {
+        for (int i = 0; i < cur->numKeys; i++)
+        {
             printf("%lu ", cur->key[i]);
         }
         printf("]\n");
         printf("3. children:[ ");
-        for (int i = 0; i <= cur->numKeys; i++) {
+        for (int i = 0; i <= cur->numKeys; i++)
+        {
             printf("%p ", cur->ptrs.inl.children[i]);
         }
         printf("]\n");
@@ -345,7 +395,8 @@ void BPTreePrintLeaves()
 {
     MBPTptr Leaf = findLeaf(0);
     int cnt = 0;
-    while (Leaf != NULL) {
+    while (Leaf != NULL)
+    {
         showNode(Leaf, cnt);
         Leaf = Leaf->ptrs.lf.right;
         cnt++;
@@ -360,16 +411,19 @@ void BPTreePrintRoot()
 }
 
 void BPTreePrintAll()
-{  // show all node (BFS)
+{ // show all node (BFS)
     int nodeNo = 0;
     initQueue(queue);
     enqueue(queue, root);
-    while ((queue->tail + 1) % MAX_NODE_NUM != queue->head) {
+    while ((queue->tail + 1) % MAX_NODE_NUM != queue->head)
+    {
         MBPTptr cur = dequeue(queue);
         showNode(cur, nodeNo);
         nodeNo++;
-        if (!cur->isLeaf) {
-            for (int i = 0; i <= cur->numKeys; i++) {
+        if (!cur->isLeaf)
+        {
+            for (int i = 0; i <= cur->numKeys; i++)
+            {
                 enqueue(queue, cur->ptrs.inl.children[i]);
             }
         }
@@ -390,8 +444,10 @@ int BPTree_GetHeight()
 int traverse_and_print_nodes(MBPTptr node)
 {
     int elems = node->numKeys;
-    if (!node->isLeaf) {
-        for (int i = 0; i <= node->numKeys; i++) {
+    if (!node->isLeaf)
+    {
+        for (int i = 0; i <= node->numKeys; i++)
+        {
             elems += traverse_and_print_nodes(node->ptrs.inl.children[i]);
         }
     }
@@ -405,10 +461,12 @@ __mram uint64_t task_no;
 
 void traverse_and_copy_nodes(MBPTptr node)
 {
-    showNode(node, nodes_transfer_num);
+    // showNode(node, nodes_transfer_num);
     memcpy(&nodes_transfer_buffer[nodes_transfer_num++], node, sizeof(BPTreeNode));
-    if (!node->isLeaf) {
-        for (int i = 0; i <= node->numKeys; i++) {
+    if (!node->isLeaf)
+    {
+        for (int i = 0; i <= node->numKeys; i++)
+        {
             traverse_and_copy_nodes(node->ptrs.inl.children[i]);
         }
     }
@@ -426,8 +484,10 @@ MBPTptr deserialize_node()
 {
     MBPTptr node = newBPTreeNode();
     memcpy(node, &nodes_transfer_buffer[nodes_transfer_num++], sizeof(BPTreeNode));
-    if (!node->isLeaf) {
-        for (int i = 0; i <= node->numKeys; i++) {
+    if (!node->isLeaf)
+    {
+        for (int i = 0; i <= node->numKeys; i++)
+        {
             node->ptrs.inl.children[i] = deserialize_node();
             node->ptrs.inl.children[i]->parent = node;
         }
@@ -441,27 +501,33 @@ MBPTptr deserialize()
     return deserialize_node();
 }
 
-
 int main()
 {
-    init_BPTree();
 
-    switch (task_no) {
-    case 0: {
-        printf("size:%d\n", sizeof(BPTreeNode));
-        printf("task 0: send nodes dpu->cpu\n");
-        for (int i = 0; i < 200; i++) {
-            BPTreeInsert(i, i);
-        }
+    switch (task_no)
+    {
+    case 0:
+    {
+        // printf("size:%d\n", sizeof(BPTreeNode));
+        // printf("task 0: send nodes dpu->cpu\n");
         serialize(root);
-        printf("num_elems = %lu\n", nodes_transfer_num);
+        // printf("num_elems = %lu\n", nodes_transfer_num);
         break;
     }
-    case 1: {
-        printf("task 1: send nodes cpu->dpu\n");
+    case 1:
+    {
+        // printf("task 1: send nodes cpu->dpu\n");
         MBPTptr new_root = deserialize();
-        traverse_and_print_nodes(new_root);
+        // traverse_and_print_nodes(new_root);
         break;
+    }
+    case 2:
+    {
+        init_BPTree();
+        for (int i = 0; i < 5000; i++)
+        {
+            BPTreeInsert(i, i);
+        }
     }
     default:
         printf("no such a task: task %lu\n", task_no);
