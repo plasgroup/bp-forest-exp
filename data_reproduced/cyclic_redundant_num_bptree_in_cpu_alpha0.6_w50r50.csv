@@ -2912,3 +2912,97 @@ total time spent: 2.02026105 sec
 total time for send_requests = 2.73507309
 total time for dpu executions =  5.31637526
 total time = 8.05144787[s], throughput = 298079712[OPS/s]
+
+size of dpu_request_t:340008,340008
+total num of requests:1500000000
+Allocated 2500 DPU(s)
+
+======= batch 0 =======
+generating requests...
+generated 299996797 requests, size = 10200240000
+sending 300000000 requests for 2500 DPUS...
+time spent for sending requests: 0.68070900 sec
+time spent for DPU execution: 1.37036502 sec
+total time spent: 2.10404611 sec
+
+======= batch 1 =======
+generating requests...
+generated 299996669 requests, size = 10200240000
+sending 300000000 requests for 2500 DPUS...
+time spent for sending requests: 0.68312103 sec
+time spent for DPU execution: 1.37797701 sec
+total time spent: 2.11279798 sec
+
+======= batch 2 =======
+generating requests...
+generated 299996668 requests, size = 10200240000
+sending 300000000 requests for 2500 DPUS...
+time spent for sending requests: 0.68708700 sec
+time spent for DPU execution: 1.34230304 sec
+total time spent: 2.08287096 sec
+
+======= batch 3 =======
+generating requests...
+generated 299996698 requests, size = 10200240000
+sending 300000000 requests for 2500 DPUS...
+time spent for sending requests: 0.69456297 sec
+time spent for DPU execution: 1.30878603 sec
+total time spent: 2.05663610 sec
+
+======= batch 4 =======
+generating requests...
+generated 299996666 requests, size = 10200240000
+sending 300000000 requests for 2500 DPUS...
+time spent for sending requests: 0.69717002 sec
+time spent for DPU execution: 1.28679800 sec
+total time spent: 2.03815293 sec
+total time for send_requests = 2.76194096
+total time for dpu executions =  5.31586409
+total time = 8.07780457[s], throughput = 297107136[OPS/s]
+
+size of dpu_request_t:340008,340008
+total num of requests:1500000000
+Allocated 2500 DPU(s)
+
+======= batch 0 =======
+generating requests...
+generated 299996797 requests, size = 10200240000
+sending 300000000 requests for 2500 DPUS...
+time spent for sending requests: 0.69659901 sec
+time spent for DPU execution: 1.37030005 sec
+total time spent: 2.12132597 sec
+
+======= batch 1 =======
+generating requests...
+generated 299996669 requests, size = 10200240000
+sending 300000000 requests for 2500 DPUS...
+time spent for sending requests: 0.67695600 sec
+time spent for DPU execution: 1.37796998 sec
+total time spent: 2.10446906 sec
+
+======= batch 2 =======
+generating requests...
+generated 299996668 requests, size = 10200240000
+sending 300000000 requests for 2500 DPUS...
+time spent for sending requests: 0.70043802 sec
+time spent for DPU execution: 1.34222901 sec
+total time spent: 2.09672594 sec
+
+======= batch 3 =======
+generating requests...
+generated 299996698 requests, size = 10200240000
+sending 300000000 requests for 2500 DPUS...
+time spent for sending requests: 0.69596899 sec
+time spent for DPU execution: 1.30879700 sec
+total time spent: 2.05899405 sec
+
+======= batch 4 =======
+generating requests...
+generated 299996666 requests, size = 10200240000
+sending 300000000 requests for 2500 DPUS...
+time spent for sending requests: 0.68387300 sec
+time spent for DPU execution: 1.28672004 sec
+total time spent: 2.02415895 sec
+total time for send_requests = 2.75723577
+total time for dpu executions =  5.31571579
+total time = 8.07295227[s], throughput = 297285728[OPS/s]
