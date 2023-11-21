@@ -1,7 +1,7 @@
 #!bin/bash
 
 mkdir -p build
-echo NR_DPUS,time_transfer,time_broadcast | tee ./data/preliminary/transfer_performance.csv
+#echo NR_DPUS,push_transfer,push_transfer_1DPUin4,push_transfer_serial,broadcast | tee ./data/preliminary/transfer_performance.csv
 for i in 1 2 4 8 16 32 64 128 256 512 1024 2048
 do
 dpu-upmem-dpurte-clang -g -O3 -Wall -Werror -Wextra -flto=thin -DNR_DPUS=$i -DNR_TASKLETS=1 -DSTACK_SIZE_DEFAULT=256 test/transfer_performance_dpu.c -o build/transfer_performance_dpu
