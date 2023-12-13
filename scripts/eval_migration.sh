@@ -1,14 +1,11 @@
 #!/bin/bash
 mkdir -p build
-echo "zipfian const, num of tasklets, total_num_requests, time_sendrequests[s], time_dpu_execution[s], total_time[s], throughput[OPS/s]" | tee ./data/ycsb.csv
-NR_TASKLETS=24
-NR_DPUS=2500
-for i in 0 0.4 0.6 0.99 1.2
+for i in 0 0.99
 do
-for m in 1 5 10 20 50 100
+for m in 5
 do
     echo "$i, $m"
-    ./bp-forest/build/host/host_app -a $i -m $m -n 20000000| tee ./data/migration/${i}_${m}.csv
+    ./bp-forest/build_UPMEM/host/host_app -a $i -m $m -n 5000000 -d bp-forest| tee ./data/migration/${i}_${m}_insert.csv
 done
 done
 # do
