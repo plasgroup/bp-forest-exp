@@ -4,8 +4,11 @@ for i in 0 0.99
 do
 for m in 5
 do
+for ops in get insert
+do
     echo "$i, $m"
-    ./bp-forest/build_UPMEM/host/host_app -a $i -m $m -n 5000000 -d bp-forest| tee ./data/migration/${i}_${m}_insert.csv
+    ./bp-forest/build_UPMEM/host/host_app -a $i -m $m -n 5000000 -d bp-forest -o $ops | tee ./data/migration/${i}_${m}_$ops.csv
+done
 done
 done
 # do
