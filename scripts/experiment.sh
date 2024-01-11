@@ -2,7 +2,7 @@
 # experiment
 
 # increment this variable when doing new experiment 
-expno="1"
+expno="2"
 
 cd bp-forest
 
