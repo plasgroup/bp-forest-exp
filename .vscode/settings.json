@@ -77,6 +77,10 @@
         "mram.h": "c",
         "assert.h": "c",
         "common.h": "c",
-        "bplustree.h": "c"
+        "bplustree.h": "c",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "ranges": "cpp",
+        "stop_token": "cpp"
     }
 }
