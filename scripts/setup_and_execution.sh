@@ -10,8 +10,7 @@ esac
 # increment this variable when doing new experiment 
 expno="1"
 
-# clone repository
-bash ./scripts/clone.sh
+# checkout
 cd ./bp-forest
 git checkout mthesis
 
@@ -20,11 +19,11 @@ bash ../scripts/build-release.sh
 bash ../scripts/build-print-distribution.sh
 
 # generate workload
-bash ./scripts/workload_gen.sh 100000000
+bash ./scripts/workload_gen.sh 600000000
 
 # experiment
 
-for build_type in release print-distribution
+for build_type in print-distribution release 
 do 
 mkdir -p ../${expno}/result/
 for zipf_const in 0 0.2 0.4 0.6 0.8 0.99 1.2

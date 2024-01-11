@@ -5,11 +5,19 @@
 expno="1"
 
 cd bp-forest
-mkdir -p ../${expno}/result/
-for build_type in release-flat
-do 
-for zipf_const in 0 0.2 0.4 0.6 0.8 0.99 1.2
+
+# build
+bash ../scripts/build-release.sh
+bash ../scripts/build-print-distribution.sh
+
+for op in get insert
 do
-build/${build_type}/host/host_app_UPMEM -a ${zipf_const} -b ${build_type}| tee ../${date}/result/${build_type}_${zipf_const}
+for build_type in print-distribution release
+do 
+mkdir -p ../${expno}/result/
+for zipf_const in 0 0.2 0.4 0.6 0.8 0.99
+do
+build/${build_type}/host/host_app_UPMEM -a ${zipf_const} -b ${build_type} -o ${op} | tee ../${expno}/result/${build_type}_${zipf_const}_${op}
+done
 done
 done
