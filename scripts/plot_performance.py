@@ -5,7 +5,7 @@ import re
 from matplotlib import pyplot as plt
 
 # expno
-expno = "1"
+expno = "2"
 # base file names to convert from csv to graph
 file_names = ["release_0", "release_0.2", "release_0.4", "release_0.6", "release_0.8", "release_0.99", "release-flat_0", "release-flat_0.2", "release-flat_0.4", "release-flat_0.6", "release-flat_0.8", "release-flat_0.99"]
 # ignore the first row (initialization batch)
