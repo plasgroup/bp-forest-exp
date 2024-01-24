@@ -47,6 +47,43 @@ def makefigure_histgram(file_name):
     os.makedirs(graph_dir + file_name, exist_ok=True)
     plt.savefig(graph_dir + file_name + "/distribution" + file_name + ".png", transparent = False)
     
+def makefigure_query_distribution(file_name):
+    dpu_num = 2500
+    plt.rcParams["savefig.dpi"] = 300
+    plt.rcParams["font.size"] = 18
+    num_queries = []
+    df = pd.read_csv(result_dir + file_name + ".csv")
+    batches = [0, 5, 10, 49]
+    colors = ["maroon", "brown", "lightcoral", "mistyrose"]
+    x_axis = list(range(1, dpu_num+1))
+    df_summary = df[df[' DPU'] == -1]
+    max_num_queries = max(df_summary[' nqueries'].values.tolist())
+    fig = plt.figure()
+    ax1 = fig.add_subplot(1,1,1)
+    ax1.set_xlim(1,dpu_num+1)
+    ax1.set_ylim(1,max_num_queries)
+    ax1.set_xlabel("PIM node")
+    ax1.set_ylabel("number of queries")
+    ax1.set_xscale("log")
+    ticks = list(ax1.get_yticks())
+    ticks.remove(0)
+    ticks.append(40)
+    ax1.set_yticks(ticks)
+    #ax1.set_yscale("log")
+    for i, batch in enumerate(batches):
+        df_batch = df[df['batch'] == batch]
+        df_batch = df_batch[df_batch[' DPU'] != -1]
+        num_queries = df_batch[' nqueries'].values.tolist()
+        num_queries.sort(reverse=True)
+        ax1.plot(x_axis, num_queries[:dpu_num], label="batch " + str(batch), lw=3, color = colors[i])
+    ax1.plot(x_axis, [40]*dpu_num, label="perfectly balanced", color='black', lw=3, ls="--")
+    plt.grid()
+    plt.legend()
+    #plt.grid()
+    fig.subplots_adjust(left=0.15, bottom=0.15, right=0.95, top=0.95)
+    os.makedirs(graph_dir + file_name, exist_ok=True)
+    plt.savefig(graph_dir + file_name + "/distribution_new.png", transparent = True)
+    
 def makefigure_max_nqueries(file_name, first_batch):
     plt.rcParams["savefig.dpi"] = 300
     df = pd.read_csv(result_dir + file_name + ".csv")
@@ -70,6 +107,7 @@ def makefigure_max_nqueries(file_name, first_batch):
 
 def makefigure_max_nnodes(file_name, first_batch):
     plt.rcParams["savefig.dpi"] = 300
+    plt.rcParams["font.size"] = 18
     df = pd.read_csv(result_dir + file_name + ".csv")
     fig = plt.figure()
     ax1 = fig.add_subplot(111)
@@ -91,7 +129,5 @@ def makefigure_max_nnodes(file_name, first_batch):
     
 # generate graphs
 for file_name in file_names:
-    make_csv(file_name)
-    makefigure_histgram(file_name)
-    makefigure_max_nnodes(file_name, 1)
-    makefigure_max_nqueries(file_name, 1)
+    #make_csv(file_name)
+    makefigure_query_distribution(file_name)
