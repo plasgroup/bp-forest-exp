@@ -5,9 +5,9 @@ import re
 from matplotlib import pyplot as plt
 
 # expno
-expno = "1"
+expno = "reproduce"
 # base file names to convert from csv to graph
-file_names = ["print-distribution_0_get", "print-distribution_0.2_get", "print-distribution_0.4_get", "print-distribution_0.6_get", "print-distribution_0.8_get", "print-distribution_0.99_get", "print-distribution_0_insert", "print-distribution_0.2_insert", "print-distribution_0.4_insert", "print-distribution_0.6_insert", "print-distribution_0.8_insert", "print-distribution_0.99_insert"]
+file_names = ["print-distribution_0_get", "print-distribution_0.4_get", "print-distribution_0.99_get"]
 
 result_dir = "./" + expno + "/result/"
 graph_dir = "./" + expno + "/graphs/"
@@ -82,7 +82,7 @@ def makefigure_query_distribution(file_name):
     #plt.grid()
     fig.subplots_adjust(left=0.15, bottom=0.15, right=0.95, top=0.95)
     os.makedirs(graph_dir + file_name, exist_ok=True)
-    plt.savefig(graph_dir + file_name + "/distribution_new.png", transparent = True)
+    plt.savefig(graph_dir + file_name + "/distribution_new.png", transparent = False)
     
 def makefigure_max_nqueries(file_name, first_batch):
     plt.rcParams["savefig.dpi"] = 300
@@ -129,5 +129,5 @@ def makefigure_max_nnodes(file_name, first_batch):
     
 # generate graphs
 for file_name in file_names:
-    #make_csv(file_name)
+    make_csv(file_name)
     makefigure_query_distribution(file_name)

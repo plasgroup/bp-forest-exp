@@ -7,8 +7,9 @@ case "$PWD" in
 	exit
 	;;
 esac
-# increment this variable when doing new experiment 
-expno="1"
+# experiment directory (change this variable to do new experiment) 
+expno="reproduce"
+
 
 # checkout
 cd ./bp-forest
@@ -22,12 +23,19 @@ bash ../scripts/build-print-distribution.sh
 bash ./scripts/workload_gen.sh 600000000
 
 # experiment
-
-for build_type in print-distribution release 
-do 
 mkdir -p ../${expno}/result/
-for zipf_const in 0 0.2 0.4 0.6 0.8 0.99 1.2
+for operation in get insert
 do
-build/${build_type}/host/host_app_UPMEM -a ${zipf_const} -b ${build_type}| tee ../${expno}/result/${build_type}_${zipf_const}
+for zipf_const in 0 0.4 0.99
+do
+build/release/host/host_app_UPMEM -a ${zipf_const} -b release -o ${operation} | tee ../${expno}/result/release_${zipf_const}_${operation}
+done
+done
+
+for operation in get insert
+do
+for zipf_const in 0 0.4 0.99
+do
+build/print-distribution/host/host_app_host_only -a ${zipf_const} -b print-distribution -o ${operation}| tee ../${expno}/result/print-distribution_${zipf_const}_${operation}
 done
 done
