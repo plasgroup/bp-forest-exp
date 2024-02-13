@@ -5,7 +5,7 @@ import re
 from matplotlib import pyplot as plt
 
 # expno
-expno = "reproduce"
+expno = "ppl_response"
 # base file names to convert from csv to graph
 file_names = ["print-distribution_0_get", "print-distribution_0.4_get", "print-distribution_0.99_get"]
 
@@ -46,6 +46,34 @@ def makefigure_histgram(file_name):
     #fig.subplots_adjust(left=0.15)
     os.makedirs(graph_dir + file_name, exist_ok=True)
     plt.savefig(graph_dir + file_name + "/distribution" + file_name + ".png", transparent = False)
+    
+def makefigure_histgram_memory(file_name):
+    plt.rcParams["savefig.dpi"] = 300
+    num_elems = []
+    df = pd.read_csv(result_dir + file_name + ".csv")
+    batches = [0, 5, 10, 50, 100, 200, 400,499]
+    fig = plt.figure()
+    df_summary = df[df[' DPU'] == -1]
+    max_num_kvpairs = max(df_summary[' nkvpairs'].values.tolist())
+    for i, batch in enumerate(batches):
+        df_batch = df[df['batch'] == batch]
+        num_kvpairs = df_batch[' nkvpairs'].values.tolist()
+        ax1 = fig.add_subplot(len(batches),1,i+1)
+        ax1.set_xlim(0,max_num_kvpairs+10000)
+        ax1.set_ylim(1,2500)
+        #ax1.set_ylabel("# of DPUs")
+        #ax1.set_title("batch " + str(batch))
+        ticks = list(ax1.get_xticks())
+        if (i == len(batches) - 1):
+            #ax1.set_xticks(ticks)
+            ax1.set_xlabel("# of key-value pairs")
+        else:
+            ax1.set_xticks([])
+        ax1.hist(num_kvpairs, bins=10, range= (0, max_num_kvpairs), log=True)
+    #plt.grid()
+    #fig.subplots_adjust(left=0.15)
+    os.makedirs(graph_dir + file_name, exist_ok=True)
+    plt.savefig(graph_dir + file_name + "/distribution_kvpairs" + file_name + ".png", transparent = False)
     
 def makefigure_query_distribution(file_name):
     dpu_num = 2500
@@ -128,6 +156,8 @@ def makefigure_max_nnodes(file_name, first_batch):
     plt.savefig(graph_dir + file_name + "/max_node_num" + file_name + ".png", transparent = False)
     
 # generate graphs
-for file_name in file_names:
-    make_csv(file_name)
-    makefigure_query_distribution(file_name)
+# for file_name in file_names:
+#     make_csv(file_name)
+#     makefigure_query_distribution(file_name)
+
+makefigure_histgram_memory("memory_balance_0.99")
