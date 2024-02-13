@@ -2,23 +2,45 @@
 # experiment
 
 # increment this variable when doing new experiment
-expno="2"
+expno="ppl_response_500M"
 
 cd bp-forest
 
 # build
-bash ../scripts/build-release.sh
-bash ../scripts/build-print-distribution.sh
-bash ../scripts/ppl.sh
+#bash ../scripts/build-release.sh 500000000
+#bash ../scripts/build-print-distribution.sh 25000000 2000 500
+#bash ../scripts/build-ppl.sh 500000000
+#bash ../scripts/build-release-50trees.sh 500000000
+#bash ../scripts/build-print-distribution-50trees.sh 25000000 2000 500
+bash ../scripts/build-ppl-50trees.sh 500000000
 
-for op in get insert
+mkdir -p ../${expno}/result/
+for build_type in ppl-50trees
 do
-    for build_type in print-distribution release ppl
+    for zipf_const in 0 0.4 0.99
     do
-        mkdir -p ../${expno}/result/
-        for zipf_const in 0 0.2 0.4 0.6 0.8 0.99
+        for op in get insert
         do
-            build/${build_type}/host/host_app_UPMEM -a ${zipf_const} -b ${build_type} -o ${op} | tee ../${expno}/result/${build_type}_${zipf_const}_${op}
+            build/${build_type}/host/host_app_UPMEM -a ${zipf_const} -b ${build_type} -o ${op} -m 5 | tee ../${expno}/result/${build_type}_${zipf_const}_${op}
         done
     done
 done
+
+# expno="ppl_response_60M"
+# bash ../scripts/build-release.sh
+# bash ../scripts/build-print-distribution.sh
+# bash ../scripts/build-ppl.sh
+# bash ../scripts/build-release-50trees.sh
+# bash ../scripts/build-print-distribution-50trees.sh
+# bash ../scripts/build-ppl-50trees.sh
+# mkdir -p ../${expno}/result/
+# for build_type in ppl ppl-50trees release release-50trees print-distribution print-distribution-50trees
+# do
+#     for zipf_const in 0 0.4 0.99
+#     do
+#         for op in get insert
+#         do
+#             build/${build_type}/host/host_app_UPMEM -a ${zipf_const} -b ${build_type} -o ${op} -m 5| tee ../${expno}/result/${build_type}_${zipf_const}_${op}
+#         done
+#     done
+# done

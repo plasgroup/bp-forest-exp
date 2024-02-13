@@ -13,7 +13,7 @@ BUILD_DIR="build/release"
 OPTION="-S . -B $BUILD_DIR"
 
 FLAGS="-O3"
-FLAGS="$FLAGS -UPRINT_DEBUG=1"
+FLAGS="$FLAGS -UPRINT_DEBUG"
 
 for zipf_const in 0 0.2 0.4 0.6 0.8 0.99 1.2
 do

@@ -9,13 +9,22 @@ case "$PWD" in
     ;;
 esac
 
-BUILD_DIR="build/ppl-50trees"
+BUILD_DIR="build/ppl"
 
 OPTION="-S . -B $BUILD_DIR"
 
 FLAGS="-O3"
 FLAGS="$FLAGS -UPRINT_DEBUG=1"
-
+if [ $# = 1 ]
+then
+    FLAGS="$FLAGS -DNUM_INIT_REQS=$1"
+elif [ $# = 0 ]
+then
+    FLAGS="$FLAGS -DNUM_INIT_REQS=60000000"
+else
+    echo "invalid arguments"
+    exit
+fi
 FLAGS_HOST="-mcmodel=large -DHOST_MULTI_THREAD=32 $FLAGS"
 FLAGS_HOST="$FLAGS_HOST -UMEASURE_XFER_BYTES"
 FLAGS_HOST="$FLAGS_HOST -DRANK_ORIENTED_XFER"
