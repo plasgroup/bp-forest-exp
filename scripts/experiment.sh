@@ -29,8 +29,8 @@ bash ../scripts/build-release.sh
 bash ../scripts/build-print-distribution.sh
 bash ../scripts/build-ppl.sh
 bash ../scripts/build-release-50trees.sh
-bash ../scripts/build-print-distribution-50trees.sh
-bash ../scripts/build-ppl-50trees.sh
+bash ../scripts/build-print-distribution-50trees.sh 60000000 40000 500
+bash ../scripts/build-ppl-50trees.sh 60000000 40000 500
 mkdir -p ../${expno}/result/
 for build_type in ppl ppl-50trees release release-50trees print-distribution print-distribution-50trees
 do
