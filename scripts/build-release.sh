@@ -14,7 +14,10 @@ BUILD_DIR="build/release"
 OPTION="-S . -B $BUILD_DIR"
 
 FLAGS="-O3 -UPRINT_DEBUG"
-if [ $# = 1 ]
+if [ $# = 3 ]
+then
+    FLAGS="$FLAGS -DNUM_INIT_REQS=$1 -DSPLIT_THRESHOLD=$2 -DDEFAULT_NR_BATCHES=$3"
+elif [ $# = 1 ]
 then
     FLAGS="$FLAGS -DNUM_INIT_REQS=$1"
 elif [ $# = 0 ]

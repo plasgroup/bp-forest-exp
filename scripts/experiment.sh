@@ -1,7 +1,5 @@
 #!bin/bash
-# experiment
 
-# increment this variable when doing new experiment
 expno="ppl_response_500M"
 
 cd bp-forest
@@ -24,13 +22,13 @@ do
     done
 done
 
-expno="ppl_response_60M"
-bash ../scripts/build-release.sh
-bash ../scripts/build-print-distribution.sh
-bash ../scripts/build-ppl.sh
-bash ../scripts/build-release-50trees.sh
-bash ../scripts/build-print-distribution-50trees.sh 60000000 40000 500
-bash ../scripts/build-ppl-50trees.sh 60000000 40000 500
+expno="ppl_response_60M_300batches"
+bash ../scripts/build-release.sh 60000000 40000 300
+bash ../scripts/build-print-distribution.sh 60000000 40000 300
+bash ../scripts/build-ppl.sh 60000000 40000 300
+bash ../scripts/build-release-50trees.sh 60000000 40000 300
+bash ../scripts/build-print-distribution-50trees.sh 60000000 40000 300
+bash ../scripts/build-ppl-50trees.sh 60000000 40000 300
 mkdir -p ../${expno}/result/
 for build_type in ppl ppl-50trees release release-50trees print-distribution print-distribution-50trees
 do
