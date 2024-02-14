@@ -5,9 +5,9 @@ import re
 from matplotlib import pyplot as plt
 
 # expno
-expno = "ppl_response"
+expno = "ppl_response_memory"
 # base file names to convert from csv to graph
-file_names = ["print-distribution_0_get", "print-distribution_0.4_get", "print-distribution_0.99_get"]
+file_names = ["print-distribution_0_insert", "print-distribution_0.4_insert", "print-distribution_0.99_insert","print-distribution-50trees_0_insert", "print-distribution-50trees_0.4_insert", "print-distribution-50trees_0.99_insert"]
 
 result_dir = "./" + expno + "/result/"
 graph_dir = "./" + expno + "/graphs/"
@@ -51,7 +51,7 @@ def makefigure_histgram_memory(file_name):
     plt.rcParams["savefig.dpi"] = 300
     num_elems = []
     df = pd.read_csv(result_dir + file_name + ".csv")
-    batches = [0, 5, 10, 50, 100, 200, 400,499]
+    batches = [0, 1, 2, 3, 4, 5, 10, 50, 100, 200, 499]
     fig = plt.figure()
     df_summary = df[df[' DPU'] == -1]
     max_num_kvpairs = max(df_summary[' nkvpairs'].values.tolist())
@@ -73,7 +73,7 @@ def makefigure_histgram_memory(file_name):
     #plt.grid()
     #fig.subplots_adjust(left=0.15)
     os.makedirs(graph_dir + file_name, exist_ok=True)
-    plt.savefig(graph_dir + file_name + "/distribution_kvpairs" + file_name + ".png", transparent = False)
+    plt.savefig(graph_dir + file_name + "/distribution_kvpairs" + file_name + ".svg", transparent = True)
     
 def makefigure_query_distribution(file_name):
     dpu_num = 2500
@@ -156,8 +156,8 @@ def makefigure_max_nnodes(file_name, first_batch):
     plt.savefig(graph_dir + file_name + "/max_node_num" + file_name + ".png", transparent = False)
     
 # generate graphs
-# for file_name in file_names:
+for file_name in file_names:
 #     make_csv(file_name)
 #     makefigure_query_distribution(file_name)
+    makefigure_histgram_memory(file_name)
 
-makefigure_histgram_memory("memory_balance_0.99")
