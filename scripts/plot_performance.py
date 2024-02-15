@@ -5,12 +5,12 @@ import re
 from matplotlib import pyplot as plt
 
 # expno
-expno = "ppl_response_memory"
+expno = "ppl_response_60M_300batches"
 
-#build_modes = ["ppl", "ppl-50trees"]
+build_modes = ["ppl", "ppl-50trees"]
 alphas = ["0", "0.4", "0.99"]
-ops = ["insert"]
-build_modes = ["print-distribution"]
+ops = ["get"]
+#build_modes = ["print-distribution"]
 #alphas = ["0", "0.4", "0.99"]
 #ops = ["insert"]
 # base file names to convert from csv to graph
@@ -64,12 +64,12 @@ def makefigure_migration(first_batch):
                 plt.xlabel('batch iteration',fontsize=18)
                 ax1.set_ylabel('throughput[MOP/s]',fontsize=18)
                 if (i == 0):
-                    ax1.plot(x_axis[first_batch:len(df)-1], throughput[first_batch:len(df)-1], label='12trees', linewidth=2)                
+                    ax1.plot(x_axis[first_batch:len(df)-1], throughput[first_batch:len(df)-1], label='12trees', linewidth=1)                
                 if (i == 1):
-                    ax1.plot(x_axis[first_batch:len(df)-1], throughput[first_batch:len(df)-1], label='50trees')   
+                    ax1.plot(x_axis[first_batch:len(df)-1], throughput[first_batch:len(df)-1], label='50trees', linewidth=1)   
         #plt.xticks(x_axis[first_batch:len(df)-1])
         ax1.set_xlim(first_batch-0.5,len(df) - 1.5)
-        ax1.set_ylim(0,2800000)
+        ax1.set_ylim(0,3500000)
         plt.grid()
         fig.subplots_adjust(left=0.15)
         os.makedirs(graph_dir, exist_ok=True)
@@ -251,8 +251,8 @@ def time_bar_migration_new(file_name, first_batch):
     plt.rcParams["savefig.dpi"] = 300
     plt.xlabel('batch iteration',fontsize=18)
     ax1.set_ylabel('time[s]',fontsize=18)
-    ax1.bar(x_axis[first_batch:len(df) - 1], migration_time[first_batch:len(df) - 1], bottom=[execution_time[i] + send_time[i] + preprocess_time[i] for i in range(first_batch, len(df) - 1)], label = "tree migration", color=colors[1])
-    ax1.bar(x_axis[first_batch:len(df) - 1], preprocess_time[first_batch:len(df) - 1], bottom=[execution_time[i] + send_time[i] for i in range(first_batch, len(df) - 1)], label = "preprocess", color=colors[0])
+    ax1.bar(x_axis[first_batch:len(df) - 1], migration_time[first_batch:len(df) - 1], bottom=[execution_time[i] + communication_time[i] + preprocess_time[i] for i in range(first_batch, len(df) - 1)], label = "tree migration", color=colors[1])
+    ax1.bar(x_axis[first_batch:len(df) - 1], preprocess_time[first_batch:len(df) - 1], bottom=[execution_time[i] + communication_time[i] for i in range(first_batch, len(df) - 1)], label = "preprocess", color=colors[0])
     ax1.bar(x_axis[first_batch:len(df) - 1], communication_time[first_batch:len(df) - 1],bottom=execution_time[first_batch:len(df) - 1], label = "CPU-PIM communication", color=colors[2])
     ax1.bar(x_axis[first_batch:len(df) - 1], execution_time[first_batch:len(df) - 1], label = "PIM query execution", color=colors[3])
     #plt.xticks(x_axis[first_batch:len(df)-1])
@@ -328,13 +328,13 @@ def throughput_slides_two():
     plt.savefig(graph_dir + "throughput_two.png", transparent = False)
     
 # generate graphs
-#for file_name in file_names:
+for file_name in file_names:
     #copy_to_csv(file_name)
     #make_csv(file_name)
     #max_query_num(file_name, first_batch)
     #time_bar_migration(file_name, first_batch)
     #max_query_num_from_distribution(file_name, first_batch)
     #time_bar_migration_new(file_name, first_batch)
-max_query_nums_from_distribution(first_batch)
-#makefigure_migration(first_batch)
+#max_query_nums_from_distribution(first_batch)
+makefigure_migration(first_batch)
 #throughput_slides()
