@@ -3,14 +3,15 @@ import numpy as np
 import os
 import re
 from matplotlib import pyplot as plt
+import japanize_matplotlib
 
 # expno
-expno = "ppl_response_60M_300batches"
+expno = "ppl_response_60M_rize"
 
-build_modes = ["ppl", "ppl-50trees"]
+#build_modes = ["ppl", "ppl-50trees"]
 alphas = ["0", "0.4", "0.99"]
 ops = ["get"]
-#build_modes = ["print-distribution"]
+build_modes = ["print-distribution", "print-distribution-50trees"]
 #alphas = ["0", "0.4", "0.99"]
 #ops = ["insert"]
 # base file names to convert from csv to graph
@@ -44,69 +45,6 @@ def copy_to_csv(file_name):
     f_csv = open(result_dir + file_name + ".csv", 'w')
     for s_line in f_result:
         f_csv.write(s_line)
-
-    
-def makefigure_migration(first_batch):
-    plt.rcParams["font.family"] = "Times New Roman"
-    for alpha in alphas:
-        fig = plt.figure()
-        ax1 = fig.add_subplot(111)
-        for i, build_mode in enumerate(build_modes):
-            for op in ops:
-                file_name = build_mode + "_" + alpha + "_" + op
-                throughput = []
-                df = pd.read_csv(result_dir + file_name + ".csv")
-                x_axis = list(range(len(df)))
-                throughput += df[' throughput'].values.tolist()
-                throughput_bpforest = max(throughput)
-                throughput_PIM_skip_list=0.2
-                plt.rcParams["savefig.dpi"] = 300
-                plt.xlabel('batch iteration',fontsize=18)
-                ax1.set_ylabel('throughput[MOP/s]',fontsize=18)
-                if (i == 0):
-                    ax1.plot(x_axis[first_batch:len(df)-1], throughput[first_batch:len(df)-1], label='12trees', linewidth=1)                
-                if (i == 1):
-                    ax1.plot(x_axis[first_batch:len(df)-1], throughput[first_batch:len(df)-1], label='50trees', linewidth=1)   
-        #plt.xticks(x_axis[first_batch:len(df)-1])
-        ax1.set_xlim(first_batch-0.5,len(df) - 1.5)
-        ax1.set_ylim(0,3500000)
-        plt.grid()
-        fig.subplots_adjust(left=0.15)
-        os.makedirs(graph_dir, exist_ok=True)
-        plt.legend()
-        #plt.savefig(graph_dir + file_name + "/max_query_num" + file_name + ".svg", transparent = True)
-        plt.savefig(graph_dir + "/thoughput_" + alpha + ".svg", transparent = True)
-    
-def max_query_nums_from_distribution(first_batch):
-    plt.rcParams["font.family"] = "Times New Roman"
-    for alpha in alphas:
-        fig = plt.figure()
-        ax1 = fig.add_subplot(111)
-        for i, build_mode in enumerate(build_modes):
-            for op in ops:
-                file_name = build_mode + "_" + alpha + "_" + op
-                send_size = []
-                df = pd.read_csv(result_dir + file_name + ".csv")
-                df_summary = df[df[' DPU'] == -1]
-                #print(df_summary.head())
-                x_axis = list(range(len(df_summary)))
-                send_size += df_summary[' nqueries'].values.tolist()
-                plt.rcParams["savefig.dpi"] = 300
-                plt.xlabel('batch iteration',fontsize=18)
-                ax1.set_ylabel('max # of queries for a DPU',fontsize=18)
-                if (i == 0):
-                    ax1.plot(x_axis[first_batch:len(df_summary)-1], send_size[first_batch:len(df_summary)-1], label='12trees', linewidth=2)                
-                if (i == 1):
-                    ax1.plot(x_axis[first_batch:len(df_summary)-1], send_size[first_batch:len(df_summary)-1], label='50trees')      
-                #plt.xticks(x_axis[first_batch:len(df)-1])
-                plt.grid()
-        ax1.set_xlim(first_batch-0.5,len(df_summary) - 1.5)
-        ax1.set_ylim(0,)
-        #fig.subplots_adjust(left=0.2)
-        os.makedirs(graph_dir, exist_ok=True)
-        plt.legend()
-        #plt.savefig(graph_dir + file_name + "/max_query_num" + file_name + ".svg", transparent = True)
-        plt.savefig(graph_dir + "/max_query_num" + alpha + ".svg", transparent = True)
     
 def max_query_num(file_name, first_batch):
     fig = plt.figure()
@@ -149,7 +87,7 @@ def max_query_num_from_distribution(file_name, first_batch):
 
 def max_query_nums_from_distribution(first_batch):
     last_batch=500
-    plt.rcParams["font.family"] = "Times New Roman"
+    plt.rcParams["font.family"] = "IPAexMincho"
     for alpha in alphas:
         fig = plt.figure()
         ax1 = fig.add_subplot(111)
@@ -163,7 +101,7 @@ def max_query_nums_from_distribution(first_batch):
                 x_axis = list(range(last_batch))
                 send_size += df_summary[' nqueries'].values.tolist()
                 plt.rcParams["savefig.dpi"] = 300
-                plt.xlabel('batch iteration',fontsize=18)
+                plt.xlabel('batch iteration', fontsize=18)
                 if (i == 0):
                     ax1.plot(x_axis[first_batch:last_batch], send_size[first_batch:last_batch], label='12trees', linewidth=2)                
                 if (i == 1):
@@ -223,7 +161,7 @@ def time_bar_migration(file_name, first_batch):
     
 def time_bar_migration_new(file_name, first_batch):
     plt.rcParams["font.size"] = 16
-    plt.rcParams["font.family"] = "Times New Roman"
+    plt.rcParams["font.family"] = "IPAexMincho"
     df = pd.read_csv(result_dir + file_name + ".csv")
     colors = ["black", "maroon", "lightcoral", "mistyrose"]
     fig = plt.figure()
@@ -328,7 +266,7 @@ def throughput_slides_two():
     plt.savefig(graph_dir + "throughput_two.png", transparent = False)
     
 # generate graphs
-for file_name in file_names:
+#for file_name in file_names:
     #copy_to_csv(file_name)
     #make_csv(file_name)
     #max_query_num(file_name, first_batch)
@@ -336,5 +274,6 @@ for file_name in file_names:
     #max_query_num_from_distribution(file_name, first_batch)
     #time_bar_migration_new(file_name, first_batch)
 #max_query_nums_from_distribution(first_batch)
-makefigure_migration(first_batch)
+#makefigure_migration(first_batch)
+max_query_nums_from_distribution(first_batch)
 #throughput_slides()
