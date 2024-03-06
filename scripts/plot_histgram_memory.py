@@ -3,6 +3,7 @@ import numpy as np
 import os
 import re
 from matplotlib import pyplot as plt
+import japanize_matplotlib
 
 # expno
 expno = "ppl_response_memory"
@@ -14,7 +15,8 @@ graph_dir = "./" + expno + "/graphs/"
 
 def makefigure_histgram_memory(file_name):
     plt.rcParams["savefig.dpi"] = 300
-    plt.rcParams["font.family"] = "Times New Roman"
+    plt.rcParams["font.size"] = 30
+    #plt.rcParams["font.family"] = "Times New Roman"
     num_elems = []
     df = pd.read_csv(result_dir + file_name + ".csv")
     batches = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 50, 100, 200, 499]
@@ -46,9 +48,9 @@ def makefigure_histgram_memory(file_name):
 
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 def makefigure_histgrams_memory(file_names):
-    plt.rcParams["font.family"] = "IPAexMincho"
+    #plt.rcParams["font.family"] = "IPAexMincho"
     plt.rcParams["savefig.dpi"] = 300
-    plt.rcParams["font.size"] = 18
+    plt.rcParams["font.size"] = 30
     batches = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 50, 100, 200, 499]
     fig, axs = plt.subplots(len(batches), 2, figsize=(15, 12), sharey=True) 
     for j, file_name in enumerate(file_names):
@@ -68,24 +70,24 @@ def makefigure_histgrams_memory(file_names):
                 ax.set_xticks([])
                 ax.set_xticklabels([])
             else:
-                ax.set_xlabel("キーと値のペア数", fontsize=24)
+                ax.set_xlabel("キーと値のペア数", fontsize=30)
             if j == 0: # 左側の図にbatchesの値を表示
-                ax.text(-0.02, 0.5, str(batch), transform=ax.transAxes, va='center', ha='right', fontsize=24)
-        fig.text(0.04, 0.97, "バッチ", fontsize=24, ha='center', va='center')
+                ax.text(-0.02, 0.5, str(batch), transform=ax.transAxes, va='center', ha='right', fontsize=30)
+        fig.text(0.06, 0.97, "バッチ目", fontsize=30, ha='center', va='center')
         fig.text(0.28, 0.03, f"a) α = 0.4", ha='center', va='top', fontsize=30)
         fig.text(0.78, 0.03, f"b) α = 0.99", ha='center', va='top', fontsize=30)
     os.makedirs(graph_dir, exist_ok=True)
     plt.tight_layout(h_pad=0.2, w_pad=0.1, pad = 0.3) 
     fig.subplots_adjust(bottom = 0.1, top = 0.95)
-    plt.savefig(graph_dir + "insert_hists.png", transparent=False)
-    plt.savefig(graph_dir + "insert_hists.svg", transparent=True)
+    plt.savefig(graph_dir + "insert_hists_slide.png", transparent=False)
+    plt.savefig(graph_dir + "insert_hists_slide.svg", transparent=True)
 
 
 
 makefigure_histgrams_memory(file_names)
 
-import cairosvg
-svg_file = graph_dir + "insert_hists.svg"
-pdf_file = graph_dir + "insert_hists.pdf"
+#import cairosvg
+#svg_file = graph_dir + "insert_hists.svg"
+#pdf_file = graph_dir + "insert_hists.pdf"
 # SVGをPDFに変換
-cairosvg.svg2pdf(url=svg_file, write_to=pdf_file)
+#cairosvg.svg2pdf(url=svg_file, write_to=pdf_file)

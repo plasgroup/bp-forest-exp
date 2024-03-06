@@ -58,4 +58,44 @@ def max_query_nums_from_distribution(first_batch):
     plt.savefig(graph_dir + "/bp_forest_max_num_queries" + ".svg", transparent = True)
     plt.savefig(graph_dir + "/bp_forest_max_num_queries"  + ".png", transparent = False)
 
-max_query_nums_from_distribution(first_batch)
+def max_query_nums_from_distribution_slide(first_batch):
+    plt.rcParams["savefig.dpi"] = 300
+    plt.rcParams["font.size"] = 24
+    fig, axs = plt.subplots(1, 2, figsize=(12, 5))
+    #title_headers = ["a) ", "b) ", "c) "]
+    handles, labels = [], []
+    for j, build_mode in enumerate(build_modes):
+        ax = axs[j]
+        #ax.text(0.5, -0.2, title_headers[j] + f'α = {alpha}', ha='center', va='top', transform=ax.transAxes)
+        if (j == 0):
+            ax.set_ylabel('最集中クエリ数')
+        if j == 1:
+            ax.yaxis.set_ticklabels([])
+        ax.set_xlabel('バッチ目')
+        for i, alpha in enumerate(["0.4", "0.99"]):
+            for op in ops:
+                file_name = build_mode + "_" + alpha + "_" + op
+                send_size = []
+                df = pd.read_csv(result_dir + file_name + ".csv")
+                df_summary = df[df[' DPU'] == -1]
+                #print(df_summary.head())
+                x_axis = list(range(len(df_summary)))
+                send_size += df_summary[' nqueries'].values.tolist()
+                label = 'α=0.4' if i == 0 else 'α=0.99'
+                linestyle = '-' if i == 0 else '--'
+                line, = ax.plot(x_axis[first_batch:len(df_summary)-1], send_size[first_batch:len(df_summary)-1], label=label, linestyle=linestyle, linewidth=1.5)                
+                #plt.xticks(x_axis[first_batch:len(df)-1])
+                if j == 0:
+                    handles.append(line)
+                    labels.append(label)
+        ax.tick_params(labelsize=24)
+        ax.set_xlim(1, 299)
+        ax.set_ylim(0,1500)
+        ax.set_xticks([1,100,200])
+    #fig.subplots_adjust(left=0.2)
+    fig.legend(handles, labels, loc='upper right', ncol=1, edgecolor='black', fancybox=False, framealpha=1)
+    plt.tight_layout(pad=0.7, h_pad=0.4, w_pad=0.2) 
+    plt.savefig(graph_dir + "/bp_forest_max_num_queries_slide" + ".svg", transparent = True)
+    plt.savefig(graph_dir + "/bp_forest_max_num_queries_slide"  + ".png", transparent = False)
+
+max_query_nums_from_distribution_slide(first_batch)
